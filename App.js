@@ -136,7 +136,7 @@ export default function App() {
   async function createPdf() {
     // Modify first page in document
 
-    const url = location;
+    const url = 'https://www.dropbox.com/s/k3q1vmovcmj1e7h/location.pdf?dl=0';
     console.log(url);
     const existingPdfBytes = await fetch(url).then((res) => res.arrayBuffer());
     const pdfDoc = await PDFDocument.load(existingPdfBytes);
