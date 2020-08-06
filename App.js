@@ -4,8 +4,8 @@ import Icon from 'react-native-vector-icons/FontAwesome'; // thomas
 import { Button, Input, CheckBox, Header } from "react-native-elements";
 
 /// Import from 'react-native-pdf-lib'
-// import PDFLib, {  PDFDocument, PDFPage } from 'react-native-pdf-lib';
-import { degrees, PDFDocument, rgb, StandardFonts } from "pdf-lib";
+import PDFLib, {  PDFDocument, PDFPage } from 'react-native-pdf-lib';
+// import { degrees, PDFDocument, rgb, StandardFonts } from "pdf-lib";
 import download from "downloadjs";
 
 // import location from "./doc/location.pdf";
@@ -136,7 +136,7 @@ export default function App() {
   async function createPdf() {
     // Modify first page in document
 
-    const url = "https://reverent-golick-11a11b.netlify.app/location.pdf";
+    const url = location;
     console.log(url);
     const existingPdfBytes = await fetch(url).then((res) => res.arrayBuffer());
     const pdfDoc = await PDFDocument.load(existingPdfBytes);
@@ -367,17 +367,17 @@ export default function App() {
       color: rgb(0, 0, 0),
     });
 
-    const pdfBytes = await pdfDoc.save();
+    // const pdfBytes = await pdfDoc.save();
 
-    // PDFDocument
-    //   .modify(existingPDF)
-    //   .modifyPages(page1)
-    //   .write() // Returns a promise that resolves with the PDF's path
-    //   .then(path => {
-    //     console.log('PDF modified at: ' + path);
-    //   });
+    PDFDocument
+      .modify(existingPdfBytes)
+      .modifyPages(page1)
+      .write() // Returns a promise that resolves with the PDF's path
+      .then(path => {
+        console.log('PDF modified at: ' + path);
+      });
 
-    //   const pdfBytes = await existingPDF.save()
+      const pdfBytes = await existingPDF.save()
 
     download(pdfBytes, "contrat-de-location.pdf", "application/pdf");
   }
