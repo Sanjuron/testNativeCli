@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Alert } from "react-native";
+import { StyleSheet, Text, View, Alert , ScrollView,} from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome'; // thomas
-import { Button, Input, ThemeProvider, CheckBox, Header, ScrollView, Picker } from "react-native-elements";
+import { Button, Input, CheckBox, Header } from "react-native-elements";
 
 /// Import from 'react-native-pdf-lib'
 // import PDFLib, {  PDFDocument, PDFPage } from 'react-native-pdf-lib';
