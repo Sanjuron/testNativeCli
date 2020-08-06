@@ -247,6 +247,27 @@ export default function App() {
         console.log('PDF modified at: ' + path);
     });
 }
+}
+
+
+return (
+  <ThemeProvider>
+    <View style={styles.container}>
+      <Text style={styles.h1}>Contrat de Location</Text>
+      <Input placeholder="Nom du demandeur" onChangeText={changeLastname} />
+      <Input
+        placeholder="Prénom du demandeur"
+        onChangeText={changeFirstame}
+      />
+      <Input
+        placeholder="Modèle de la voiture à louer"
+        onChangeText={changeModel}
+      />
+      <Button title="sauvegarder pdf" onPress={createPdf} />
+    </View>
+  </ThemeProvider>
+);
+}
 
 const styles = StyleSheet.create({
   container: {
