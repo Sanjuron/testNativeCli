@@ -8,7 +8,7 @@ import { Button, Input, CheckBox, Header } from "react-native-elements";
 import { degrees, PDFDocument, rgb, StandardFonts } from "pdf-lib";
 import download from "downloadjs";
 
-import location from "./doc/location.pdf";
+// import location from "./doc/location.pdf";
 
 export default function App() {
   // setState première page
@@ -136,7 +136,7 @@ export default function App() {
   async function createPdf() {
     // Modify first page in document
 
-    const url = 'https://www.dropbox.com/s/k3q1vmovcmj1e7h/location.pdf?dl=0';
+    const url = "https://reverent-golick-11a11b.netlify.app/location.pdf";
     console.log(url);
     const existingPdfBytes = await fetch(url).then((res) => res.arrayBuffer());
     const pdfDoc = await PDFDocument.load(existingPdfBytes);
