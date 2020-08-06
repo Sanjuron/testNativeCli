@@ -136,12 +136,22 @@ export default function App() {
   async function createPdf() {
     // Modify first page in document
 
-    const url = location;
-    console.log(url);
-    const existingPdfBytes = await fetch(url).then((res) => res.arrayBuffer());
-    const pdfDoc = await PDFDocument.load(existingPdfBytes);
-    console.log(pdfDoc);
-    const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
+    // const url = location;
+    // console.log(url);
+    // const existingPdfBytes = await fetch(url).then((res) => res.arrayBuffer());
+    // const pdfDoc = await PDFDocument.load(existingPdfBytes);
+    // console.log(pdfDoc);
+    // const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
+
+    const existingPDF = './doc/location.pdf';
+PDFDocument
+  .modify(existingPDF)
+  .modifyPages(page1, page2)
+  .addPage(page3)
+  .write() // Returns a promise that resolves with the PDF's path
+  .then(path => {
+    console.log('PDF modified at: ' + path);
+  });
 
     const pages = pdfDoc.getPages();
     // récupération des pages qui contiennent des champs à remplir
@@ -369,13 +379,7 @@ export default function App() {
 
     // const pdfBytes = await pdfDoc.save();
 
-    PDFDocument
-      .modify(existingPdfBytes)
-      .modifyPages(page1)
-      .write() // Returns a promise that resolves with the PDF's path
-      .then(path => {
-        console.log('PDF modified at: ' + path);
-      });
+
 
       const pdfBytes = await existingPDF.save()
 
