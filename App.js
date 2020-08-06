@@ -1,14 +1,17 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Alert , ScrollView,} from "react-native";
+import { StyleSheet, Text, View, Alert , ScrollView} from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome'; // thomas
-import { Button, Input, CheckBox, Header } from "react-native-elements";
+import { Button, Input, CheckBox, Header, ThemeProvider } from "react-native-elements";
 
 /// Import from 'react-native-pdf-lib'
 import PDFLib, {  PDFDocument, PDFPage } from 'react-native-pdf-lib';
 // import { degrees, PDFDocument, rgb, StandardFonts } from "pdf-lib";
 import download from "downloadjs";
 
-// import location from "./doc/location.pdf";
+import location from "./doc/location.pdf";
+PDFDocument
+  .modify(location)
+
 
 export default function App() {
   // setState première page
@@ -141,64 +144,46 @@ export default function App() {
       x: 116,
       y: 605,
       size: 16,
-      font: helveticaFont,
-      color: rgb(0, 0, 0),
     })
     .drawText(lastname, {
       x: 258,
       y: 605,
       size: 16,
-      font: helveticaFont,
-      color: rgb(0, 0, 0),
     })
     .drawText(day, {
       x: 105,
       y: 575,
       size: 16,
-      font: helveticaFont,
-      color: rgb(0, 0, 0),
     })
     .drawText(month, {
       x: 137,
       y: 575,
       size: 16,
-      font: helveticaFont,
-      color: rgb(0, 0, 0),
     })
     .drawText(year, {
       x: 168,
       y: 575,
       size: 16,
-      font: helveticaFont,
-      color: rgb(0, 0, 0),
     })
     .drawText(adress, {
       x: 153,
       y: 548,
       size: 16,
-      font: helveticaFont,
-      color: rgb(0, 0, 0),
     })
     .drawText(zipcode, {
       x: 139,
       y: 518,
       size: 16,
-      font: helveticaFont,
-      color: rgb(0, 0, 0),
     })
     .drawText(city, {
       x: 349,
       y: 518,
       size: 16,
-      font: helveticaFont,
-      color: rgb(0, 0, 0),
     })
     .drawText(license, {
       x: 388,
       y: 488,
       size: 16,
-      font: helveticaFont,
-      color: rgb(0, 0, 0),
     });
     const secondPage = PDFPage
     .modify(1)
@@ -206,38 +191,30 @@ export default function App() {
       x: 182,
       y: 652,
       size: 16,
-      font: helveticaFont,
-      color: rgb(0, 0, 0),
     })
     .drawText(workplace, { 
       x: 182,
       y: 625,
       size: 16,
-      font: helveticaFont,
-      color: rgb(0, 0, 0),
     })
     .drawText(km, { 
       x: 254,
       y: 595,
       size: 16,
-      font: helveticaFont,
-      color: rgb(0, 0, 0),
     })
     .drawText(startContract, { 
       x: 292,
       y: 284,
       size: 16,
-      font: helveticaFont,
-      color: rgb(0, 0, 0),
     })
     .drawText(endContract, { 
       x: 245,
       y: 256,
       size: 16,
-      font: helveticaFont,
-      color: rgb(0, 0, 0),
     });
- 
+    const docsDir = await PDFLib.getDocumentsDirectory();
+    console.log(docsDir)
+
   const existingPDF = './doc/location.pdf';
     PDFDocument
     .modify(existingPDF)
@@ -247,7 +224,7 @@ export default function App() {
         console.log('PDF modified at: ' + path);
     });
 }
-}
+
 
 
 return (
@@ -267,8 +244,8 @@ return (
     </View>
   </ThemeProvider>
 );
-}
 
+}
 const styles = StyleSheet.create({
   container: {
     // flex: 1,
