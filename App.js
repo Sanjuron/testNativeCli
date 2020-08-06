@@ -7,11 +7,8 @@ import { Button, Input, CheckBox, Header, ThemeProvider } from "react-native-ele
 import PDFLib, {  PDFDocument, PDFPage } from 'react-native-pdf-lib';
 // import { degrees, PDFDocument, rgb, StandardFonts } from "pdf-lib";
 import download from "downloadjs";
-
-import location from "./doc/location.pdf";
-PDFDocument
-  .modify(location)
-
+import RNFS from 'react-native-fs';
+import RNFetchBlob from 'react-native-fetch-blob';
 
 export default function App() {
   // setState première page
@@ -54,7 +51,7 @@ export default function App() {
   const changeLastname = (val) => {
     setLastname(val);
   };
-  const changeFirstame = (val) => {
+  const changeFirstname = (val) => {
     setFirstname(val);
   };
   const changeDay = (val) => {
@@ -212,18 +209,31 @@ export default function App() {
       y: 256,
       size: 16,
     });
-    const docsDir = await PDFLib.getDocumentsDirectory();
-    console.log(docsDir)
 
-  const existingPDF = './doc/location.pdf';
-    PDFDocument
-    .modify(existingPDF)
-    .modifyPages(firstPage, secondPage)
-    .write() 
-    .then(path => {
-        console.log('PDF modified at: ' + path);
-    });
+
+    let dirs = RNFetchBlob.fs.dirs;
+    RNFetchBlob
+      .config({
+        // response data will be saved to this path if it has access right.
+        path : '/storage/emulated/0/Android/data/com.testnativecli/files/' + '/location.pdf'
+      })
+      .fetch('GET', 'https://reverent-golick-11a11b.netlify.app/location.pdf', {
+        //some headers ..
+      })
+      .then((res) => {
+        // the path should be dirs.DocumentDir + 'path-to-file.anything'
+        console.log('The file saved to ', res.path())
+        PDFDocument
+        .modify(res.path())
+        .modifyPages(firstPage, secondPage)
+        .write()  
+        .then(path => {
+            console.log('PDF modified at: ' + path);  
+        });
+      })
+
 }
+
 
 
 
@@ -234,7 +244,7 @@ return (
       <Input placeholder="Nom du demandeur" onChangeText={changeLastname} />
       <Input
         placeholder="Prénom du demandeur"
-        onChangeText={changeFirstame}
+        onChangeText={changeFirstname}
       />
       <Input
         placeholder="Modèle de la voiture à louer"
