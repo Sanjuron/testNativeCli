@@ -215,7 +215,7 @@ export default function App() {
     RNFetchBlob
       .config({
         // response data will be saved to this path if it has access right.
-        path : '/storage/emulated/0/Android/data/com.testnativecli/files/' + '/location.pdf'
+        path : dirs.DownloadDir+ '/location.pdf'
       })
       .fetch('GET', 'https://reverent-golick-11a11b.netlify.app/location.pdf', {
         //some headers ..
