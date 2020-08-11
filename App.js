@@ -43,6 +43,9 @@ export default function App() {
   const [clean, setClean] = useState('');
   const [average, setAverage] = useState('');
   const [dirty, setDirty] = useState('');
+  const [cleanO, setCleanO] = useState('');
+  const [averageO, setAverageO] = useState('');
+  const [dirtyO, setDirtyO] = useState('');
   // carburant à voir
   const [key, setKey] = useState('');
   const [registration, setRegistration] = useState('');
@@ -119,6 +122,15 @@ export default function App() {
   };
   const changeDirty = (val) => {
     setDirty(val);
+  };
+  const changeCleanO = (val) => {
+    setCleanO(val);
+  };
+  const changeAverageO = (val) => {
+    setAverageO(val);
+  };
+  const changeDirtyO = (val) => {
+    setDirtyO(val);
   };
   const changeKey = (val) => {
     setKey(val);
@@ -211,6 +223,72 @@ export default function App() {
         y: 256,
         size: 16,
       });
+    const fifthPage = PDFPage.modify(4)
+      .drawText(brand, {
+        x: 182,
+        y: 680,
+        size: 16,
+      })
+      .drawText(model, {
+        x: 182,
+        y: 650,
+        size: 16,
+      })
+      .drawText(color, {
+        x: 123,
+        y: 620,
+        size: 16,
+      })
+      .drawText(licensePlate, {
+        x: 218,
+        y: 590,
+        size: 16,
+      })
+      .drawText(startKm, {
+        x: 82,
+        y: 470,
+        size: 16,
+      })
+      .drawText(clean, {
+        x: 89,
+        y: 440,
+        size: 16,
+      })
+      .drawText(average, {
+        x: 139,
+        y: 440,
+        size: 16,
+      })
+      .drawText(dirty, {
+        x: 188,
+        y: 440,
+        size: 16,
+      })
+      .drawText(key, {
+        x: 78,
+        y: 328,
+        size: 16,
+      })
+      .drawText(registration, {
+        x: 78,
+        y: 312,
+        size: 16,
+      })
+      .drawText(assurance, {
+        x: 78,
+        y: 298,
+        size: 16,
+      })
+      .drawText(yellowVest, {
+        x: 78,
+        y: 278,
+        size: 16,
+      })
+      .drawText(triangle, {
+        x: 78,
+        y: 261,
+        size: 16,
+      });
 
     let dirs = RNFetchBlob.fs.dirs;
     RNFetchBlob.config({
@@ -224,7 +302,7 @@ export default function App() {
         // the path should be dirs.DocumentDir + 'path-to-file.anything'
         console.log('The file saved to ', res.path());
         PDFDocument.modify(res.path())
-          .modifyPages(firstPage, secondPage)
+          .modifyPages(firstPage, secondPage, fifthPage)
           .write()
           .then((path) => {
             console.log('PDF modified at: ' + path);
@@ -346,12 +424,12 @@ export default function App() {
             leftIcon={<Icon name="car" size={17} color="#7B8894" />}
           />
 
-        <View style={styles.documents}>
+          <View style={styles.documents}>
             <CheckBox center title="Clé du véhicule" />
             <CheckBox center title="Carte Grise" />
             <CheckBox center title="Assurance" />
           </View>
-          
+
           <View style={styles.security}>
             <CheckBox center title="Gilet Jaune" />
             <CheckBox center title="Triangle" />
@@ -395,7 +473,7 @@ const styles = StyleSheet.create({
     marginTop: 25,
     color: '#009CBF',
     fontWeight: 'bold',
-    textAlign: "center",
+    textAlign: 'center',
   },
   birthday: {
     color: '#009CBF',
@@ -413,5 +491,5 @@ const styles = StyleSheet.create({
   security: {
     marginTop: 20,
     marginBottom: 20,
-  }
+  },
 });
