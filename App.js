@@ -264,6 +264,22 @@ export default function App() {
         y: 440,
         size: 16,
       })
+      .drawText(cleanO, {
+        // modifier les y
+        x: 89,
+        y: 440,
+        size: 16,
+      })
+      .drawText(averageO, {
+        x: 139,
+        y: 440,
+        size: 16,
+      })
+      .drawText(dirtyO, {
+        x: 188,
+        y: 440,
+        size: 16,
+      })
       .drawText(key, {
         x: 78,
         y: 328,
@@ -343,6 +359,10 @@ export default function App() {
             leftIcon={<Icon name="user" size={17} color="#7B8894" />}
           />
           {/* date de naissance pas bon, à diviser j/m/a */}
+
+          
+          <View style={styles.documents}>
+
           <Text style={styles.birthday}>Date de naissance :</Text>
           <Input
             placeholder="Jour..."
@@ -359,6 +379,8 @@ export default function App() {
             leftIcon={<Icon name="calendar" size={17} color="#7B8894" />}
             onChangeText={changeYear}
           />
+          </View>
+
           <Input
             placeholder="Adresse..."
             onChangeText={changeAdress}
@@ -425,6 +447,20 @@ export default function App() {
           />
 
           <View style={styles.documents}>
+            <Text>Propreté intérieure</Text>
+            <CheckBox center title="Propre" />
+            <CheckBox center title="Moyen" />
+            <CheckBox center title="Sale" />
+          </View>
+
+          <View style={styles.documents}>
+          <Text>Propreté extérieure</Text>
+            <CheckBox center title="Propre" />
+            <CheckBox center title="Moyen" />
+            <CheckBox center title="Sale" />
+          </View>
+
+          <View style={styles.documents}>
             <CheckBox center title="Clé du véhicule" />
             <CheckBox center title="Carte Grise" />
             <CheckBox center title="Assurance" />
@@ -481,7 +517,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'left',
     marginLeft: 7,
-    textDecorationLine: 'underline',
+    // textDecorationLine: 'underline',
     marginBottom: 5,
   },
   documents: {
