@@ -11,6 +11,9 @@
   },
   "dependencies": {
     "downloadjs": "^1.4.7",
+    "expo-constants": "^9.2.0",
+    "expo-image-picker": "^9.1.1",
+    "expo-permissions": "^9.3.0",
     "pdf-lib": "^1.9.0",
     "react": "16.13.1",
     "react-native": "0.63.2",

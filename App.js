@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {StyleSheet, Text, View, Alert, ScrollView} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'; // thomas
 import {
@@ -309,7 +309,7 @@ export default function App() {
     let dirs = RNFetchBlob.fs.dirs;
     RNFetchBlob.config({
       // response data will be saved to this path if it has access right.
-      path: dirs.DownloadDir + '/location.pdf',
+      path: '/storage/emulated/0/Android/data/com.testnativecli/files/' + '/location.pdf',
     })
       .fetch('GET', 'https://reverent-golick-11a11b.netlify.app/location.pdf', {
         //some headers ..
@@ -325,6 +325,22 @@ export default function App() {
           });
       });
   }
+
+
+  // getPermissionAsync = async () => {
+  //   if (Constants.platform.android) {
+  //     const { status } = await Permissions.askAsync(Permissions.READ_EXTERNAL_STORAGE);
+  //     if (status !== 'granted') {
+  //       alert('Désolé, nous avons besoin de votre permission pour accéder à votre galerie');
+  //     }
+  //   }
+  // };
+
+
+  // useEffect(() => {
+  //   getPermissionAsync();
+  // })
+
 
   return (
     <ThemeProvider>
